@@ -117,11 +117,10 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  PedidoProduto $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //public function destroy(Pedido $pedido, Produto $produto)
-    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
+    public function destroy(Pedido $pedido, Produto $produto)
     {
         /*
         print_r($pedido->getAttributes());
@@ -129,7 +128,7 @@ class PedidoProdutoController extends Controller
         print_r($produto->getAttributes());
         */
 
-        //echo $pedido->id.' - '.$produto->id;
+        echo $pedido->id.' - '.$produto->id;
 
         //convencional
         /*
@@ -140,11 +139,9 @@ class PedidoProdutoController extends Controller
         */
 
         //detach (delete pelo relacionamento)
-        //$pedido->produtos()->detach($produto->id);
+        $pedido->produtos()->detach($produto->id);
         //produto_id
-
-        $pedidoProduto->delete();
         
-        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
     }
 }
